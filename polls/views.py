@@ -67,7 +67,7 @@ def question(request: HttpRequest):
     try:
         body_unicode = request.body.decode('utf-8')
         bodyreq = json.loads(body_unicode)
-        models.Question.objects.create(question_class=bodyreq['question_class'], pub_date=bodyreq['pub_date'])
+        models.Question.objects.create(question_text=bodyreq['question_class'], pub_date=bodyreq['pub_date'])
         return HttpResponse(bodyreq)
     except Exception as e:
         print(e)
