@@ -3,25 +3,27 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse, HttpRequest
 from django.views.decorators.http import require_POST
-from models import Choice, Question
-
+from . import models
+import json
 
 @require_POST
 def index(request: HttpRequest):
     try:
-        bodyreq = request.body
+        body_unicode = request.body.decode('utf-8')
+        bodyreq = json.loads(body_unicode)
         return HttpResponse(bodyreq)
-    except:
+    except Exception as e:
         ...
         
 @require_POST
 def question(request: HttpRequest):
     try:
-        bodyreq = request.body
-        Question.objects.create(question_class='', pub_date='')
+        body_unicode = request.body.decode('utf-8')
+        bodyreq = json.loads(body_unicode)
+        models.Question.objects.create(question_class=bodyreq['question_class'], pub_date=bodyreq['pub_date'])
         return HttpResponse(bodyreq)
-    except:
-        ...
+    except Exception as e:
+        print(e)
         
   
   
@@ -31,7 +33,7 @@ def question(request: HttpRequest):
 def choice(request: HttpRequest):
     try:
         bodyreq = request.body
-        Choice.objects.create(question='',choice_texte='',votes='')
+        models.Choice.objects.create(question='',choice_texte='',votes='')
         return HttpResponse(bodyreq)
     except:
         ...
