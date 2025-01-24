@@ -1,4 +1,4 @@
-#!/home/senac/Projetos/Django/.venv/bin/python3
+#!/home/senac/Projetos/Novo_projeto_django/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
